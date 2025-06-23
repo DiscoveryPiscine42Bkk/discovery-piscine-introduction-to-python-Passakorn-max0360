@@ -1,2 +1,2 @@
 my_age = 21 + 42
-print(my_age)
+print(my_age + "$")
