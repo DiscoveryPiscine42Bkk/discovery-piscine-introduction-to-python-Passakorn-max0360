@@ -53,7 +53,7 @@ def checkmate(board_received):
 
 # Step 4: Define the attack functions for each piece (i=row, j=column, ki=king_row, kj=king_column)
 def pawn_attacks(i, j, ki, kj):                                             #Pawn attack logic
-    return (i + 1 == ki and j - 1 == kj) or (i + 1 == ki and j + 1 == kj)   # Pawn = i+1 (moves one step up), j-1 (left) or j+1 (right) to attack the king
+    return (i - 1 == ki and j - 1 == kj) or (i - 1 == ki and j + 1 == kj)   # Pawn = i-1 (moves one step up), j-1 (left) or j+1 (right) to attack the king
 
 def bishop_attacks(i, j, ki, kj, board): # Bishop attack logic
     if abs(i - ki) != abs(j - kj):       # Bishop attack is diagonal, so absolute Row distance MUST equal absolute Column distance
