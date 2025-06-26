@@ -4,9 +4,9 @@ from checkmate import checkmate
 
 def main():
     board = """\
-....
-.KB.
-..K.
+R...
+.K..
+..P.
 ....\
 """
     checkmate(board)
