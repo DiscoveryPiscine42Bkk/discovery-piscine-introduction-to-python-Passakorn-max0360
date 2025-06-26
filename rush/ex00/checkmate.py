@@ -1,24 +1,38 @@
 #!/usr/bin/env python3
 
-#Step 1: Determine the baord parameters
+#Step 1: Determine the board parameters
 def checkmate(board_received): 
     board_rows = board_received.strip().split('\n') # From the input string, split it into rows based on "\n" characters.(When see it, split a new line)
-    n = len(board_rows)                             # now count number of rows in the board
+    rows = len(board_rows)                          # now count number of rows in the board
+    if rows == 0:
+        print("Error! Put a board again!")          # If there is no any rows, print ERROR                             
+        return
+    for row in board_rows:                          # Now check if column = row to make square board
+        column = len(row)
+        if column != rows:                       
+            print("Error! Put a board again!")      # If it's not equal, print ERROR                             
+            return
     board = [list(row) for row in board_rows]       # Convert each row into a list of characters for easier manipulation
-
-#Step 2: Find the position of the king
-    for i in range(n):
-        for j in range(n):          # Two loops for checking each cell in the board (i=row, j=column)
+     
+    #Step 2: Find the position of the king
+    ki, kj = -1, -1                             # Initialize king position
+    king_found = False
+    for i in range(rows):
+        for j in range(rows):                   # Two loops for checking each cell in the board (i=row, j=column)
             if board[i][j] == 'K':
-                ki, kj = i, j       #If King is found, store its position in ki and kj
+                ki, kj = i, j                   #If King is found, store its position in ki and kj
+                king_found = True
                 break
-        else:
-            continue                # If King not found in this row, continue to next row
-        break                       # If King found, break the outer loop
+        if king_found:
+            break                               # If King found, break the outer loop
+    
+    if not king_found:    
+        print("Error! There isn't King!")       # If there's no King, print error
+        return       
 
-#Step 3: Check for attackers
-    for i in range(n):
-        for j in range(n):          # Again, two loops to check each cell in the board
+    #Step 3: Check for attackers
+    for i in range(rows):
+        for j in range(rows):          # Again, two loops to check each cell in the board
             piece = board[i][j]     # Get the piece at the current position
             if piece == '.':
                 continue            # If the cell is empty, skip to the next cell
